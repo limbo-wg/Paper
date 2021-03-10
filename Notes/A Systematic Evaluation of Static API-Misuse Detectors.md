@@ -2,7 +2,7 @@
 
 #### API Misuse Classification
 
-![MUC_MUBENCH](..\Images\MUC_MUBENCH.png)
+![MUC_MUBENCH](../Images/MUC_MUBENCH.png)
 
 1. Method Call (方法调用)
 
