@@ -23,9 +23,9 @@
 
 $\mathbf{SENSEI}$是一个$DNN$的自动化数据增强框架，目的是在自然环境产生的变体下，增强$DNN$的鲁棒性泛化能力。通过对部分数据进行替换来增添强数据(不改变数据集大小)，因此$SENSEI$的最大贡献就是如何选择最佳的替换数据。然后又提供了$SENSEI$-$SA$算法，通过跳过某些数据点的增强来减少训练时间。
 
-**优化思路**：在泛化鲁棒性的要求下训练$DNN$的问题可以被转化为凸优化$(saddle point optimization)$问题：除了优化权重参数$\theta$之外还要为每个训练输入$x$找到最佳变体$x'=x+\delta$，因此有目标函数$\underset{\theta}{min}E(x,y)\sim D[\underset{\delta\in S}{max}L(\theta,x+\delta,y)]$，通过将内部的最大化问题与外部的最小化问题解耦，来估计最优值。根据种子训练输入$x$，和$x$的邻域$S$的转换函数$t(\overset{\rightarrow}{\rho},x)$，找到能生成最佳变体$x'$的$\overset{\rightarrow}{\rho}$：$\underset{\overset{\rightarrow}{\rho}\in S}{max}L(\theta,t(\overset{\rightarrow}{\rho},x),y)$
+**优化思路**：在泛化鲁棒性的要求下训练$DNN$的问题可以被转化为凸优化$(saddle\ point\ optimization)$问题：除了优化权重参数$\theta$之外还要为每个训练输入$x$找到最佳变体$x'=x+\delta$，因此有目标函数$\underset{\theta}{min}E_{(x,y)\sim D}[\underset{\delta\in S}{max}L(\theta,x+\delta,y)]$，通过将内部的最大化问题与外部的最小化问题解耦，来估计最优值。根据种子训练输入$x$，和$x$的邻域$S$的转换函数$t(\overset{\rightarrow}{\rho},x)$，找到能生成最佳变体$x'$的$\overset{\rightarrow}{\rho}$：$\underset{\overset{\rightarrow}{\rho}\in S}{max}L(\theta,t(\overset{\rightarrow}{\rho},x),y)$
 
-**算法思路**：将$DNN$数据增强问题作为优化问题，使用遗传搜索($genetic\ algorithm,GA$算法)对每个训练数据的变体进行探索，以找到"$worst$"变体来增强，同时跳过某些增强($selective\ augmentation,SA$)的方式加速训练。其中，$GA$算法在$DNN$训练的每次迭代时探索少量变体兵线则最差变体，将其作为下次迭代的种子。$SA$通过在训练时对某些数据点的鲁棒性分析，跳过对其的增强，以减少$DNN$的训练时间
+**算法思路**：将$DNN$数据增强问题作为优化问题，使用遗传搜索($genetic\ algorithm,GA$算法)对每个训练数据的变体进行探索，以找到"$worst$"变体来增强，同时跳过某些增强($selective\ augmentation,SA$)的方式加速训练。其中，$GA$算法在$DNN$训练的每次迭代时探索少量变体并寻找最差变体，将其作为下次迭代的种子。$SA$通过在训练时对某些数据点的鲁棒性分析，跳过对其的增强，以减少$DNN$的训练时间
 
 1. **最佳增强**$\mathbf{Optimal\ Augmentation}$
 
@@ -50,7 +50,7 @@ $\mathbf{SENSEI}$是一个$DNN$的自动化数据增强框架，目的是在自�
 
         能根据测试输入度量$DNN$的指标都能作为适应度函数(比如$neuron\ coverage$和$surprise\ adequacy$)，但必须保证适应度函数的高效性
 
-2. **选择性增强**$\mathbf{Selevtive\ Augmentation}$
+2. **选择性增强**$\mathbf{Selective\ Augmentation}$
 
     $SENSEI$-$SA$会跳过模型中鲁棒的数据点，选择性增强技术仅基于模型关于数据点的鲁棒性分析。对鲁棒的数据点使用以下两种指标对鲁棒性进行形式化：
 
