@@ -61,19 +61,27 @@ $w_{ij}$的更新方式（以$DSA$距离为例）：
 
     通过这种方式，如果当前选中的样本$i$有很高的致错能力的话，就能激活所有与样本$i$连接的权重
 
+#### 实验评估
 
+##### 数据集(模型)：MNIST(CN5、LeNet5)、CIFAR10(CN12、VGG16)、CIFAR100(VGG16)
 
+有效性评估：
 
+![DeepEST_figure1](../Images/DeepEST_figure1.png)
 
+$MSE(\hat{\theta})=\frac{1}{30}\sum\limits_{i=1}^{30}(\hat{\theta}_i-\theta)^2$，其中$\theta$是模型的真实准确率，总共进行了30次实验
 
+在五个项目的评估中，$DeepEST_C$的$MSE$评估效果最好，$CES$效果次之；而$DSA$和$LSA$在不同项目上的差异很大
 
+![DeepEST_table1](../Images/DeepEST_table1.png)
 
+表中展示了30次实验中，每种方法找到的致错样本数量，及其标准差
 
+所有的$DeepEST$方法都比$SRS$和$CES$找到了更多的致错样本，其中基于置信度的方法$DeepEST_{CS}$寻找致错样本的效果最好
 
+综合$MSE$和致错样本数量两个指标，$DeepEST_C$的综合效果最好，比$CES$和$SRS$找到了更多的致错样本，同时还具有较高的模型准确率预测效果
 
-
-
-
+![DeepEST_table2](../Images/DeepEST_table2.png)
 
 
 
