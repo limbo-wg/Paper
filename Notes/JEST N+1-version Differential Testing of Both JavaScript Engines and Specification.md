@@ -182,7 +182,7 @@ N+1版差分测试在使用交叉引用预言之外，还使用了一个“机�
         |    [[Call]]    |        `typeof f === "function"`         |
         | [[Construct]]  | `Reflect.construct(function(){}, [], x)` |
 
-        内部槽 [[Prototype]] 表示对象的原型，可以通过内置函数`Object.getPrototypeOf`获得。内部插槽 [[Extensible]] 也可通过内置函数`Object.isExtensible`获得。内部方法 [[Call]] 和 [[Construct]] 分别表示给定对象是函数还是构造函数，因为这些方法不是 JavaScript 值，所以直接用 `$assert.callable` 和 `$assert.constructable` 这两个helper来检查它们是否存在。对于 [[Call]]，使用`typeof`运算符，因为当且仅当给定值是具有 [[Call]] 方法的对象时，它才返回“函数”。对于 [[Construct]] 方法，使用`Reflect.construct`内置函数来检查 [[Construct]] 方法的存在并进行调用。
+        内部槽 [[Prototype]] 表示对象的原型，可以通过内置函数`Object.getPrototypeOf`获得。内部插槽 [[Extensible]] 也可通过内置函数`Object.isExtensible`获得。内部方法 [[Call]] 和 [[Construct]] 分别表示给定对象是函数还是构造函数，因为这些方法不是 JavaScript 值，所以直接用 `$assert.callable` 和 `$assert.constructable` 这两个helper来检查它们是否存在。对于 [[Call]]，使用`typeof`运算符，因为当且仅当给定值是具有 [[Call]] 方法的对象时，它才返回“function”。对于 [[Construct]] 方法，使用`Reflect.construct`内置函数来检查 [[Construct]] 方法的存在并进行调用。
 
         下面的例子给出了具体的用法：
 
